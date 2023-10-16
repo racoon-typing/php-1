@@ -10,7 +10,7 @@
 
 <body>
     <div class="page-wrapper">
-
+        <!-- Хедер -->
         <header class="main-header">
             <div class="main-header__container container">
                 <h1 class="visually-hidden">YetiCave</h1>
@@ -23,6 +23,7 @@
                 </form>
                 <a class="main-header__add-lot button" href="pages/add-lot.html">Добавить лот</a>
 
+                <!-- Меню: пользователь / регистрация -->
                 <nav class="user-menu">
                     <?php if ($is_auth) : ?>
                         <div class="user-menu__logged">
@@ -44,11 +45,15 @@
             </div>
         </header>
 
-        <?= $main; ?>
+        <!-- Шаблон контента страницы -->
+        <main class="container">
+            <?= $main; ?>
+        </main>
     </div>
 
     <footer class="main-footer">
         <nav class="nav">
+            <!-- Навигация по категориям в футере -->
             <ul class="nav__list container">
                 <?php foreach ($categories as $value) : ?>
                     <li class="nav__item">
