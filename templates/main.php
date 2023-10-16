@@ -31,8 +31,11 @@
                                 <?= format_num(htmlspecialchars($good['price'])); ?>
                             </span>
                         </div>
-                        <div class="lot__timer timer">
-                            12:24
+                        <?php $res = get_time_left(htmlspecialchars($good["end_time"])) ?>
+                        <div class="lot__timer timer
+                            <?php if ($res[0] < 1): ?>timer--finishing<?php endif; ?>
+                        ">
+                            <?= "$res[0]: $res[1]"; ?>
                         </div>
                     </div>
                 </div>
