@@ -1,3 +1,4 @@
+-- Добавляет категории в таблицу
 INSERT INTO
     categories (character_code, name_category)
 VALUES
@@ -8,6 +9,7 @@ VALUES
     ('tools', 'Инструменты'),
     ('other', 'Разное');
 
+-- Добавляет пользователей в таблицу
 INSERT INTO
     users (email, user_name, user_password, contacts)
 VALUES
@@ -32,6 +34,7 @@ VALUES
         'телефон: 12345'
     );
 
+-- Добавляет лоты в таблицу
 INSERT INTO
     lots (
         title,
@@ -108,11 +111,15 @@ VALUES
         '2023-10-17 20:31',
         500,
         1,
-        6,
+        2,
+        6
     );
 
+-- Сделал +
+
+-- Добавляет ставки в таблицу
 INSERT INTO
-    lots (
+    bets (
         price_bet,
         user_id,
         lot_id,
@@ -122,6 +129,7 @@ VALUES
     (400, 1, 2),
     (1000, 1, 3);
 
+-- Получает все значения из таблицы категория
 SELECT
     *
 FROM
@@ -153,9 +161,13 @@ SET
 WHERE
     id = 1;
 
-
-SELECT price_bet, date_bet FROM lots
-LEFT JOIN bets
-ON lots.id = bets.lot_id
-GROUP BY date_bet
-ORDER BY DESC;
+SELECT
+    price_bet,
+    date_bet
+FROM
+    lots
+    LEFT JOIN bets ON lots.id = bets.lot_id
+GROUP BY
+    date_bet
+ORDER BY
+    DESC;
