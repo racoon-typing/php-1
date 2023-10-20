@@ -125,4 +125,37 @@ VALUES
 SELECT
     *
 FROM
-    users;
+    categories;
+
+SELECT
+    date_creation,
+    title,
+    start_price,
+    img,
+    ?,
+    category_id
+FROM
+    lots
+ORDER BY
+    DESC;
+
+SELECT
+    id,
+    name_category
+FROM
+    lots
+    LEFT JOIN categories ON lots.category_id = categories.id;
+
+UPDATE
+    lots
+SET
+    start_price = 500
+WHERE
+    id = 1;
+
+
+SELECT price_bet, date_bet FROM lots
+LEFT JOIN bets
+ON lots.id = bets.lot_id
+GROUP BY date_bet
+ORDER BY DESC;
