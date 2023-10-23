@@ -133,25 +133,23 @@ SELECT
 FROM
     categories;
 
-
 -- Неправильный
 SELECT
     date_creation,
     title,
     start_price,
     img,
-    
-    ?,
+    -- winner_id,
     category_id
 FROM
-    lots
+    lots l
+    LEFT JOIN categories c ON l.category_id = c.id
 ORDER BY
-    DESC;
+    date_creation DESC;
 
-
--- Неправильный
 SELECT
-    id,
+    DISTINCT title,
+    category_id,
     name_category
 FROM
     lots
@@ -164,15 +162,11 @@ SET
 WHERE
     id = 1;
 
-
--- Неправильный
 SELECT
-    price_bet,
-    date_bet
+    date_bet,
+    price_bet
 FROM
-    lots
-    LEFT JOIN bets ON lots.id = bets.lot_id
-GROUP BY
-    date_bet
+    bets
+    JOIN lots ON bets.lot_id = lots.id
 ORDER BY
-    DESC;
+    date_bet DESC;
