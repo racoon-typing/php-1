@@ -115,15 +115,12 @@ VALUES
         6
     );
 
-
--- Сделал +
-
 -- Добавляет ставки в таблицу
 INSERT INTO
     bets (
         price_bet,
         user_id,
-        lot_id,
+        lot_id
     )
 VALUES
     (500, 2, 1),
@@ -136,11 +133,14 @@ SELECT
 FROM
     categories;
 
+
+-- Неправильный
 SELECT
     date_creation,
     title,
     start_price,
     img,
+    
     ?,
     category_id
 FROM
@@ -148,6 +148,8 @@ FROM
 ORDER BY
     DESC;
 
+
+-- Неправильный
 SELECT
     id,
     name_category
@@ -162,6 +164,8 @@ SET
 WHERE
     id = 1;
 
+
+-- Неправильный
 SELECT
     price_bet,
     date_bet
