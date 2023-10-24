@@ -133,20 +133,23 @@ SELECT
 FROM
     categories;
 
--- Неправильный
+-- Получает самые новые открытые лоты
 SELECT
-    date_creation,
+    DISTINCT date_creation,
     title,
     start_price,
     img,
-    -- winner_id,
-    category_id
+    price_bet,
+    name_category
 FROM
     lots l
     LEFT JOIN categories c ON l.category_id = c.id
+    LEFT JOIN bets b ON l.winner_id = b.id
 ORDER BY
     date_creation DESC;
 
+
+-- Получает все лоты
 SELECT
     DISTINCT title,
     category_id,
@@ -155,6 +158,7 @@ FROM
     lots
     LEFT JOIN categories ON lots.category_id = categories.id;
 
+-- Обновляет значение лота
 UPDATE
     lots
 SET
@@ -162,6 +166,7 @@ SET
 WHERE
     id = 1;
 
+-- Получает список ставок для лота
 SELECT
     date_bet,
     price_bet
