@@ -44,7 +44,6 @@ INSERT INTO
         date_finish,
         step,
         user_id,
-        winner_id,
         category_id
     )
 VALUES
@@ -56,7 +55,6 @@ VALUES
         '2019-10-10 14:31',
         50,
         1,
-        2,
         1
     ),
     (
@@ -67,7 +65,6 @@ VALUES
         '2019-10-10 15:31',
         100,
         2,
-        1,
         1
     ),
     (
@@ -78,7 +75,6 @@ VALUES
         '2019-10-10 16:31',
         200,
         3,
-        1,
         2
     ),
     (
@@ -89,7 +85,6 @@ VALUES
         '2019-10-10 17:31',
         300,
         4,
-        2,
         3
     ),
     (
@@ -100,7 +95,6 @@ VALUES
         '2019-10-10 18:31',
         400,
         5,
-        4,
         4
     ),
     (
@@ -111,7 +105,6 @@ VALUES
         '2023-10-17 20:31',
         500,
         1,
-        2,
         6
     );
 
@@ -129,49 +122,56 @@ VALUES
 
 -- Получает все значения из таблицы категория
 SELECT
-    *
+    name_category AS 'Категория'
 FROM
     categories;
 
 -- Получает самые новые открытые лоты
 SELECT
-    DISTINCT date_creation,
-    title,
+    DISTINCT title,
     start_price,
     img,
-    price_bet,
     name_category
 FROM
     lots l
-    LEFT JOIN categories c ON l.category_id = c.id
-    LEFT JOIN bets b ON l.winner_id = b.id
-ORDER BY
-    date_creation DESC;
-
+    JOIN categories c ON l.category_id = c.id;
 
 -- Получает все лоты
 SELECT
-    DISTINCT title,
+    DISTINCT lots.id,
+    date_creation,
+    title,
+    lot_description,
+    img,
+    start_price,
+    date_finish,
+    step,
     category_id,
     name_category
 FROM
     lots
-    LEFT JOIN categories ON lots.category_id = categories.id;
+    JOIN categories ON lots.category_id = categories.id
+WHERE
+    lots.id = 4;
 
 -- Обновляет значение лота
 UPDATE
     lots
 SET
-    start_price = 500
+    title = 'Ботинки для сноуборда обычные'
 WHERE
-    id = 1;
+    id = 4;
 
 -- Получает список ставок для лота
 SELECT
     date_bet,
-    price_bet
+    price_bet title,
+    user_name
 FROM
     bets
     JOIN lots ON bets.lot_id = lots.id
+    JOIN users ON bets.user_id = users.id
+WHERE
+    lots.id = 4
 ORDER BY
     date_bet DESC;
