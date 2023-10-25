@@ -20,25 +20,13 @@ if (!$con) {
 }
 
 // Запрос для получения списка товаров
-$sql_get_goods = "SELECT * FROM lots"
-    . " JOIN categories ON lots.category_id = categories.id"
-    . " ORDER BY date_creation DESC LIMIT 6";
+$sql_get_goods = get_query_list_good();
 $result_goods  = mysqli_query($con, $sql_get_goods);
-$goods = mysqli_fetch_all($result_goods, MYSQLI_ASSOC);
-
-// Запрос для получения списка товаров через mysqli_prepare
-// $sql_get_goods = "SELECT * FROM lots"
-//     . " JOIN categories ON lots.category_id = categories.id"
-//     . " ORDER BY date_creation DESC LIMIT ?";
-// $stmt_goods = mysqli_prepare($con, $sql_get_goods);
-// $limit_goods = 6;
-// mysqli_stmt_bind_param($stmt_goods, 'i', $limit_goods);
-// mysqli_stmt_execute($stmt_goods);
-// $result_goods = mysqli_stmt_get_result($stmt_goods);
-// $goods = mysqli_fetch_all($result_goods, MYSQLI_ASSOC); 
-
-
-
+if ($result_goods) {
+    $goods = mysqli_fetch_all($result_goods, MYSQLI_ASSOC);
+} else {
+    $error = mysqli_error($con);
+}
 
 $page_body = include_template(
     'main.php',

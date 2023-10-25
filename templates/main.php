@@ -16,7 +16,7 @@
     </div>
     <ul class="lots__list">
         <!-- Объявления -->
-        <?php foreach ($goods as $key => $good) : ?>
+        <?php foreach ($goods as $good) : ?>
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="<?= $good['img'] ?>" width="350" height="260" alt="">
