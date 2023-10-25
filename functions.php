@@ -37,3 +37,9 @@ function get_time_left($date)
 
     return $res;
 };
+
+
+function get_query_list_good() {
+
+};
+
