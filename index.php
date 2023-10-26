@@ -5,28 +5,12 @@ require_once('./init.php');
 require_once('./data.php');
 
 
-if (!$con) {
-    $error = mysqli_connect_error();
-} else {
-    // Запрос для получения списка категорий
-    $sql_get_categories = "SELECT character_code, name_category FROM categories";
-    $result_categories = mysqli_query($con, $sql_get_categories);
+// Получает список категорий
+$categories = get_categories($con);
 
-    if ($result_categories) {
-        $categories = mysqli_fetch_all($result_categories, MYSQLI_ASSOC);
-    } else {
-        $error = mysqli_error($con);
-    }
-}
+// Получает список товаров
+$goods = get_goods($con);
 
-// Запрос для получения списка товаров
-$sql_get_goods = get_query_list_good();
-$result_goods  = mysqli_query($con, $sql_get_goods);
-if ($result_goods) {
-    $goods = mysqli_fetch_all($result_goods, MYSQLI_ASSOC);
-} else {
-    $error = mysqli_error($con);
-}
 
 $page_body = include_template(
     'main.php',

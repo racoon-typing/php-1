@@ -39,13 +39,62 @@ function get_time_left($date)
 };
 
 
+// Получает SQL запрос на получение списка товаров
 function get_query_list_good()
 {
-    return "SELECT lots.title, lots.start_price, lots.img, lots.date_finish, categories.name_category FROM lots 
+    return "SELECT lots.id, lots.title, lots.start_price, lots.img, lots.date_finish, categories.name_category FROM lots 
     JOIN categories ON lots.category_id = categories.id 
     WHERE lots.date_finish < NOW()
     ORDER BY date_creation DESC LIMIT 6";
 };
+
+// Получает список товаров
+function get_goods($con)
+{
+    if (!$con) {
+        $error = mysqli_connect_error();
+        return $error;
+    } else {
+        $sql_get_goods = get_query_list_good();
+        $result_goods  = mysqli_query($con, $sql_get_goods);
+
+        if ($result_goods) {
+            $goods = mysqli_fetch_all($result_goods, MYSQLI_ASSOC);
+            return $goods;
+        } else {
+            $error = mysqli_error($con);
+            return $error;
+        }
+    }
+};
+
+// Получает список категорий
+function get_categories($con)
+{
+    if (!$con) {
+        $error = mysqli_connect_error();
+        return $error;
+    } else {
+        // Запрос для получения списка категорий
+        $sql_get_categories = "SELECT character_code, name_category FROM categories";
+        $result_categories = mysqli_query($con, $sql_get_categories);
+
+        if ($result_categories) {
+            $categories = mysqli_fetch_all($result_categories, MYSQLI_ASSOC);
+            return $categories;
+        } else {
+            $error = mysqli_error($con);
+            return $error;
+        }
+    }
+};
+
+// Получает SQL запрос на получение лота по $id
+function get_query_lot($id)
+{
+    return "SELECT * FROM lots WHERE id =" .  $id;
+}
+
 
 // Запрос для получения списка товаров через mysqli_prepare
 // $sql_get_goods = "SELECT * FROM lots"
