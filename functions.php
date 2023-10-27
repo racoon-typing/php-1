@@ -58,7 +58,10 @@ function get_arrow($result_query)
 };
 
 
-// Получает SQL запрос на получение списка товаров
+/**
+ * Формирует SQL-запрос для показа спика лотов
+ * @return string SQL-запрос
+ */
 function get_query_list_good()
 {
     return "SELECT lots.id, lots.title, lots.start_price, lots.img, lots.date_finish, categories.name_category FROM lots 
@@ -68,12 +71,16 @@ function get_query_list_good()
 };
 
 
-// Получает SQL запрос на получение лота по $id
+/**
+ * Формирует SQL-запрос для показа лота на страницу lot.php
+ * @param integer $id_lot id лота
+ * @return string SQL-запрос
+ */
 function get_query_lot($id_lot)
 {
     return "SELECT * FROM lots 
     JOIN categories ON lots.category_id = categories.id 
-    WHERE lots.id =" .  $id_lot;
+    WHERE lots.id = $id_lot";
 }
 
 
