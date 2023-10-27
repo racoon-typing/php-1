@@ -4,20 +4,41 @@ require_once('./functions.php');
 require_once('./init.php');
 require_once('./data.php');
 
+// if (!$con) {
+//     die("Ошибка подключения: " . mysqli_connect_error());
+// }
 
+// Проверка на отправку формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input_values = $_POST;
-    $title = $input_values['lot-name'];
-    $category_id = $input_values['category'];
-    $lot_description = $input_values['message'];
-    $start_price = $input_values['lot-rate'];
-    $step = $input_values['lot-step'];
-    $date_finish = $input_values['lot-date'];
+    $title = $_POST['lot-name'];
+    $lot_description = $_POST['message'];
+    $target_file = '123';
+    $start_price = $_POST['lot-rate'];
+    $date_finish = $_POST['lot-date'];
+    $step = $_POST['lot-step'];
+    $category_id = $_POST['category'];
 
+    $sql = "INSERT INTO lots (date_creation, title, lot_description, start_price, date_finish, step, category_id) 
+    VALUES (NOW(), ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($con, $sql);
 
-    $sql = "INSERT INTO lots (`id`, date_creation`, `title`, `lot_description`, `img`, `start_price`, `date_finish`, `step`, `user_id`, `winner_id`, `category_id`)
-    VALUES (?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, 'ssisii', $title, $lot_description, $start_price, $date_finish, $step, $category_id);
+
+        if (mysqli_stmt_execute($stmt)) {
+            echo "Запись успешно добавлена в базу данных.";
+        } else {
+            echo "Ошибка при выполнении запроса: " . mysqli_error($con);
+            echo "Номер ошибки: " . mysqli_errno($con);
+        }
+
+        // Закройте подготовленный запрос
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Ошибка при создании подготовленного запроса: " . mysqli_error($con);
+    }
 };
+
 
 // Получает список категорий
 $categories = get_categories($con);
@@ -42,5 +63,3 @@ $layout_content = include_template(
 
 
 print($layout_content);
-
-
