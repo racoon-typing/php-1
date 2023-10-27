@@ -9,13 +9,15 @@ $categories = get_categories($con);
 
 // Создает щаблон страницы 404
 $page_404 = include_template(
-    'page_404',
+    '404.php',
     [
         "categories" => $categories
     ]
 );
 
+// Получает значение id из адресной строки
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+
 
 if ($id) {
     $sql = get_query_lot($id);
@@ -26,7 +28,7 @@ if ($id) {
 
 $res = mysqli_query($con, $sql);
 if ($res) {
-    $lot = get_arrow($con);
+    $lot = get_arrow($res);
 } else {
     $error = mysqli_error($con);
 }
