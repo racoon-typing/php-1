@@ -84,7 +84,13 @@ function get_query_lot($id_lot)
 }
 
 
-// Получает список товаров
+
+/**
+ * Возвращает массив товаров
+ * @param $con Подключение к MySQL
+ * @return $error Описание последней ошибки подключения
+ * @return array $goods Ассоциативный массив с лотами из базы данных
+ */
 function get_goods($con)
 {
     if (!$con) {
@@ -95,7 +101,7 @@ function get_goods($con)
         $result_goods = mysqli_query($con, $sql_get_goods);
 
         if ($result_goods) {
-            $goods = mysqli_fetch_all($result_goods, MYSQLI_ASSOC);
+            $goods = get_arrow($result_goods);
             return $goods;
         } else {
             $error = mysqli_error($con);
@@ -104,7 +110,12 @@ function get_goods($con)
     }
 };
 
-// Получает список категорий
+/**
+ * Возвращает массив категорий
+ * @param $con Подключение к MySQL
+ * @return $error Описание последней ошибки подключения
+ * @return array $categories Ассоциативный массив с категориями лотов из базы данных
+ */
 function get_categories($con)
 {
     if (!$con) {
@@ -112,11 +123,11 @@ function get_categories($con)
         return $error;
     } else {
         // Запрос для получения списка категорий
-        $sql_get_categories = "SELECT character_code, name_category FROM categories";
+        $sql_get_categories = "SELECT id, character_code, name_category FROM categories";
         $result_categories = mysqli_query($con, $sql_get_categories);
 
         if ($result_categories) {
-            $categories = mysqli_fetch_all($result_categories, MYSQLI_ASSOC);
+            $categories = get_arrow($result_categories);
             return $categories;
         } else {
             $error = mysqli_error($con);

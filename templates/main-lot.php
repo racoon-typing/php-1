@@ -21,8 +21,8 @@
         </div>
         <div class="lot-item__right">
             <div class="lot-item__state">
-                <?php $res = get_time_left(htmlspecialchars($lot["date_finish"])) ?>
-                <div class="lot-item__timer timer <?php if ($res[0] < 60) : ?>timer--finishing<?php endif; ?>">
+                <?php $res = get_time_left(htmlspecialchars($lot["date_finish"])); ?>
+                <div class="lot-item__timer timer <?php if ($res[0] < 1) : ?>timer--finishing<?php endif; ?>">
                     <?= "$res[0]: $res[1]"; ?>
                 </div>
                 <div class="lot-item__cost-state">
