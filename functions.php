@@ -84,7 +84,6 @@ function get_query_lot($id_lot)
 }
 
 
-
 /**
  * Возвращает массив товаров
  * @param $con Подключение к MySQL

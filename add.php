@@ -8,21 +8,17 @@ require_once('./data.php');
 // Получает список категорий
 $categories = get_categories($con);
 
-// Получает список товаров
-$goods = get_goods($con);
 
-
-$page_body = include_template(
-    'main.php',
+$page_content = include_template(
+    'main-add-lot.php',
     [
-        'categories' => $categories,
-        'goods' => $goods
+        'categories' => $categories
     ]
 );
 $layout_content = include_template(
-    'layout.php',
+    'layout-add-lot.php',
     [
-        'main' => $page_body,
+        'content' => $page_content,
         'categories' => $categories,
         'title' => $title,
         'is_auth' => $is_auth,
