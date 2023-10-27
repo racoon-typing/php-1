@@ -2,10 +2,9 @@
     <ul class="nav__list container">
         <?php foreach ($categories as $category) : ?>
             <li class="nav__item">
-                <!-- <a href="all-lots.html"><?= $category['name_category']; ?></a> -->
                 <a href="all-lots.html"><?= htmlspecialchars($category['name_category']); ?></a>
             </li>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </ul>
 </nav>
 <form class="form form--add-lot container form--invalid" action="https://echo.htmlacademy.ru" method="post"> <!-- form--invalid -->

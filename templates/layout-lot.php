@@ -55,7 +55,7 @@
       <ul class="nav__list container">
         <?php foreach ($categories as $category) : ?>
           <li class="nav__item">
-            <a href="all-lots.html"><?= $category['name_category'] ?></a>
+            <a href="all-lots.html"><?= $category['name_category']; ?></a>
           </li>
         <?php endforeach; ?>
       </ul>
