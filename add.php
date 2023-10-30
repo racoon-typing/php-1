@@ -10,26 +10,26 @@ require_once('./data.php');
 
 // Проверка на отправку формы
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $required = ['lot-name', 'category', 'lot-img', 'lot-rate', 'lot-step', 'lot-date'];
-    $errors = [];
+    // $required = ['lot-name', 'category', 'lot-img', 'lot-rate', 'lot-step', 'lot-date'];
+    // $errors = [];
 
-    $rules = [
-        'lot-rate' => function ($value) {
-            return;
-        },
-        'lot-step' => function ($value) {
-            return;
-        },
-        'lot-date' => function ($value) {
-            return;
-        }
-    ];
+    // $rules = [
+    //     'lot-rate' => function ($value) {
+    //         return;
+    //     },
+    //     'lot-step' => function ($value) {
+    //         return;
+    //     },
+    //     'lot-date' => function ($value) {
+    //         return;
+    //     }
+    // ];
 
-    $lot = filter_input_array(INPUT_POST, ['lot-rate' => FILTER_DEFAULT, 'lot-step' => FILTER_DEFAULT, 'lot-date' => FILTER_DEFAULT], true);
+    // $lot = filter_input_array(INPUT_POST, ['lot-rate' => FILTER_DEFAULT, 'lot-step' => FILTER_DEFAULT, 'lot-date' => FILTER_DEFAULT], true);
 
-    foreach ($lot as $key => $value) {
-        print($lot);
-    };
+    // foreach ($lot as $key => $value) {
+    //     print($lot);
+    // };
 
     $lot = $_POST;
     $filename = uniqid() . '.gif';
